@@ -8,6 +8,10 @@ public class Product extends Entity {
     Product() {
     }
 
+    public Product(Long id) {
+        super(id);
+    }
+
     public Product(Long id, String name) {
         super(id);
         this.name = name;

@@ -18,7 +18,7 @@ public class ProductCampaign extends Campaign {
         return product;
     }
 
-    protected void setProduct(Product product) {
+    public void setProduct(Product product) {
         this.product = product;
     }
 

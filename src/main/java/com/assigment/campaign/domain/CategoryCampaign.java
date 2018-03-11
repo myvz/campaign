@@ -18,7 +18,7 @@ public class CategoryCampaign extends Campaign {
         return category;
     }
 
-    protected void setCategory(Category category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 }

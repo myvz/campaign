@@ -9,6 +9,10 @@ public class Category extends Entity {
 
     }
 
+    public Category(Long id) {
+        super(id);
+    }
+
     public Category(String name) {
         this.name = name;
     }

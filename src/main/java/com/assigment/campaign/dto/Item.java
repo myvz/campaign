@@ -7,6 +7,10 @@ public class Item {
     private Long categoryId;
     private BigDecimal price;
 
+    protected Item() {
+
+    }
+
     public Item(Long productId, Long categoryId, BigDecimal price) {
         this.productId = productId;
         this.categoryId = categoryId;
