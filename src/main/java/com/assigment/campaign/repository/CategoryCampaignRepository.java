@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface CategoryCampaignRepository extends CampaignRepository<CategoryCampaign> {
 
-    @Cacheable("categoryCampaign")
-    Optional<CategoryCampaign> findByCategory(Long categoryId);
+    @Cacheable("campaign")
+    Optional<CategoryCampaign> findByCategoryId(Long categoryId);
 }

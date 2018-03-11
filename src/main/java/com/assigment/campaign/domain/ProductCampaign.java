@@ -1,17 +1,18 @@
 package com.assigment.campaign.domain;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(referencedColumnName = "id")
 public class ProductCampaign extends Campaign {
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
+
+    @Column(name = "PRODUCT_ID",insertable = false,updatable = false)
+    private Long productId;
 
     public Product getProduct() {
         return product;
@@ -19,5 +20,9 @@ public class ProductCampaign extends Campaign {
 
     protected void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Long getProductId() {
+        return productId;
     }
 }

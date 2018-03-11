@@ -1,17 +1,18 @@
 package com.assigment.campaign.domain;
 
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 @PrimaryKeyJoinColumn(referencedColumnName = "id")
 public class CategoryCampaign extends Campaign {
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CATEGORY_ID")
     private Category category;
+
+    @Column(name = "CATEGORY_ID",insertable = false,updatable = false)
+    private Long categoryId;
 
     public Category getCategory() {
         return category;

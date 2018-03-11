@@ -4,7 +4,8 @@ import com.assigment.campaign.domain.*;
 import com.assigment.campaign.dto.DiscountedItem;
 import com.assigment.campaign.dto.Item;
 import com.assigment.campaign.repository.CategoryCampaignRepository;
-import com.assigment.campaign.repository.ProductCampainRepository;
+import com.assigment.campaign.repository.ProductCampaignRepository;
+import com.assigment.campaign.service.impl.DiscountServiceImpl;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,8 +32,8 @@ public class DiscountServiceTest {
     @Before
     public void setUp() throws Exception {
         CategoryCampaignRepository categoryCampaignRepository = mock(CategoryCampaignRepository.class);
-        ProductCampainRepository productCampainRepository = mock(ProductCampainRepository.class);
-        discountService=new DiscountServiceImpl(categoryCampaignRepository, productCampainRepository);
+        ProductCampaignRepository productCampaignRepository = mock(ProductCampaignRepository.class);
+        discountService=new DiscountServiceImpl(categoryCampaignRepository, productCampaignRepository);
         ProductCampaign campaign = new ProductCampaignBuilder()
                 .name("Ucuz ayfon")
                 .product(new Product(5L,"Ayfon"))
@@ -59,10 +60,10 @@ public class DiscountServiceTest {
                 .discountType(DiscountType.PRICE)
                 .discount(BigDecimal.valueOf(20))
                 .build();
-        when(productCampainRepository.findByProduct(5L)).thenReturn(Optional.of(campaign));
-        when(productCampainRepository.findByProduct(10L)).thenReturn(Optional.of(campaign2));
-        when(categoryCampaignRepository.findByCategory(100L)).thenReturn(Optional.of(campaign3));
-        when(categoryCampaignRepository.findByCategory(200L)).thenReturn(Optional.of(campaign4));
+        when(productCampaignRepository.findByProductId(5L)).thenReturn(Optional.of(campaign));
+        when(productCampaignRepository.findByProductId(10L)).thenReturn(Optional.of(campaign2));
+        when(categoryCampaignRepository.findByCategoryId(100L)).thenReturn(Optional.of(campaign3));
+        when(categoryCampaignRepository.findByCategoryId(200L)).thenReturn(Optional.of(campaign4));
 
         items.clear();
         items.add(new Item(10L, 200L, BigDecimal.valueOf(100.99)));

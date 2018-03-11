@@ -1,9 +1,10 @@
-package com.assigment.campaign.service;
+package com.assigment.campaign.service.impl;
 
 import com.assigment.campaign.dto.DiscountedItem;
 import com.assigment.campaign.dto.Item;
 import com.assigment.campaign.repository.CategoryCampaignRepository;
-import com.assigment.campaign.repository.ProductCampainRepository;
+import com.assigment.campaign.repository.ProductCampaignRepository;
+import com.assigment.campaign.service.DiscountService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,12 +19,12 @@ public class DiscountServiceImpl implements DiscountService {
 
     private CategoryCampaignRepository categoryCampaignRepository;
 
-    private ProductCampainRepository productCampainRepository;
+    private ProductCampaignRepository productCampaignRepository;
 
     public DiscountServiceImpl(CategoryCampaignRepository categoryCampaignRepository,
-                               ProductCampainRepository productCampainRepository) {
+                               ProductCampaignRepository productCampaignRepository) {
         this.categoryCampaignRepository = categoryCampaignRepository;
-        this.productCampainRepository = productCampainRepository;
+        this.productCampaignRepository = productCampaignRepository;
     }
 
     @Override
@@ -47,7 +48,7 @@ public class DiscountServiceImpl implements DiscountService {
                             .stream()
                             .max(Comparator.comparing(DiscountedItem::getPrice))
                             .ifPresent(discountedItem -> {
-                                categoryCampaignRepository.findByCategory(key)
+                                categoryCampaignRepository.findByCategoryId(key)
                                         .ifPresent(categoryCampaign -> {
                                             BigDecimal discountedPrice = categoryCampaign.calculateDiscountedPrice(discountedItem.getDiscountedPrice());
                                             discountedItem.setDiscountedPrice(discountedPrice);
@@ -58,7 +59,7 @@ public class DiscountServiceImpl implements DiscountService {
 
     private void applyProductCampaign(List<DiscountedItem> discountedItems) {
         discountedItems.forEach(discountedItem -> {
-            productCampainRepository.findByProduct(discountedItem.getProductId())
+            productCampaignRepository.findByProductId(discountedItem.getProductId())
                     .ifPresent(productCampaign -> {
                         BigDecimal discountedPrice = productCampaign.calculateDiscountedPrice(discountedItem.getDiscountedPrice());
                         discountedItem.setDiscountedPrice(discountedPrice);
